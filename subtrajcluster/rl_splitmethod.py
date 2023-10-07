@@ -190,10 +190,10 @@ def init_cluster(split_traj, cluster_dict_ori, clustermethod, ep, sample):
 if __name__ == "__main__":
     res = []
     parser = argparse.ArgumentParser(description="splitmethod")
-    parser.add_argument("-splittrajfile", default='../subtrajs/ied_subtrajs_100', help="subtraj file")
+    parser.add_argument("-splittrajfile", default='../data/ied_subtrajs_100', help="subtraj file")
     parser.add_argument("-clustermethod", default='dbscan', help="subtraj file")
     parser.add_argument("-baseclusterfile", default='../data/tdrive_clustercenter', help="subtraj file")
-    parser.add_argument("-ep", type=float, default=0.01, help="ep")
+    parser.add_argument("-ep", type=float, default=0.005, help="ep")
     parser.add_argument("-sample", type=int, default=70, help="sample")
     
     args = parser.parse_args()

@@ -93,16 +93,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="crossvalidate")
     parser.add_argument("-baseclusT", default='../data/tdrive_clustercenter', help="baseclusTfile")
     parser.add_argument("-baseclusE", default='../data/tdrive_clustercenter', help="baseclusEfile")
-    parser.add_argument("-saveclus", default='kfoldmodels', help="saveclusfile")
+    parser.add_argument("-saveclus", default='../models/kfoldmodels', help="saveclusfile")
     parser.add_argument("-k", type=int, default=5, help="k")
     parser.add_argument("-calsse", type=int, default=0, help="calsse")
     parser.add_argument("-dataset", default='tdrive', help="dataset")
-    parser.add_argument("-theta", type=float, default=0.02, help="theta")
+    parser.add_argument("-theta", type=float, default=0.8, help="theta")
     
     res1, res2 = [], []
     args = parser.parse_args()
     for i in range(args.k):
-        savecluspath = '../'+args.saveclus+str(i)
+        savecluspath = args.saveclus+str(i)
         modelnames = os.listdir(savecluspath)
         model = savecluspath + '/' + modelnames[0]
         testfilename = '../data/'+args.dataset+'_testset'+str(i)

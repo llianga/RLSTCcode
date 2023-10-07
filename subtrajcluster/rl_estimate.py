@@ -75,8 +75,8 @@ def effective_rl(elist, savesubtraj, theta):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="estimate")
     parser.add_argument("-amount", type=int, default=1000, help="data size")
-    parser.add_argument("-modeldir", default='../models', help="model folder")
-    parser.add_argument("-modelchoose", type=int, default=2, help="choose model")
+    parser.add_argument("-modeldir", default='../models/kfoldmodels2', help="model folder")
+    parser.add_argument("-modelchoose", type=int, default=0, help="choose model")
     parser.add_argument("-testdata", default='../data/Tdrive_testdata', help="choose model")
     parser.add_argument("-base_cluster", default='../data/tdrive_clustercenter', help="base_cluster")
     parser.add_argument("-savesubtraj", type=int, default=0, help="whether save subtraj")

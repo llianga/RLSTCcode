@@ -12,29 +12,24 @@ This is a python implementation of the paper 'Sub-trajectory Clustering with Dee
 - Datasets can be downloaded from [here](https://drive.google.com/file/d/1LNIPnAAfyZNBaUvRoV6ghITCcgaMJ-sw/view?usp=drive_link), and tar -xzvf data.tar.gz
 
 ## Preprocessing
-To get the required data or you can directly use our provided dataset.
-
 ```
 cd subtrajcluster/
 python preprocessing.py
 ```
 
-You could preprocess other datasets.
+You could directly use our provided datasets.
 
 ## Training
-You could use n-fold validations to train models, the default value of n is 5. 
-
-```
-python crosstrain.py
-```
-
-You can also train the models using a non n-fold validation method.
-
 ```
 python rl_train.py
 ```
 
-- Models can be downloaded from [here](https://drive.google.com/file/d/19l8UqEIT2Z5ndTKLq3_Z4xClKbHtAZMq/view?usp=drive_link), and tar -xzvf savemodels.tar.gz
+You could use n-fold validations to train models, the default value of n is 5. 
+```
+python crosstrain.py
+```
+
+The trained models can be downloaded from [here](https://drive.google.com/file/d/19l8UqEIT2Z5ndTKLq3_Z4xClKbHtAZMq/view?usp=drive_link), and tar -xzvf savemodels.tar.gz
 
 ## Experiments
-Please refer to the [experiments](./experiments/readme.md) for the experiments
+Please refer to the [experiments](./experiments/readme.md) for the experiments.

@@ -9,7 +9,7 @@ This is a python implementation of the paper 'Sub-trajectory Clustering with Dee
 - scikit-learn==0.24.2
 - tqdm==4.62.0
 - numpy==1.19.2
-- Datasets can be downloaded from [here](https://drive.google.com/file/d/1g-LA6UX3MLXJn0_XAaXq0NmCrT8VD-Y8/view?usp=drive_link), and tar -zxvf data.tar.gz -C ./data/
+- Datasets can be downloaded from [here](https://drive.google.com/file/d/1LNIPnAAfyZNBaUvRoV6ghITCcgaMJ-sw/view?usp=drive_link), and tar -xzvf data.tar.gz
 
 ## Preprocessing
 To get the required data or you can directly use our provided dataset.
@@ -34,7 +34,7 @@ You can also train the models using a non n-fold validation method.
 python rl_train.py
 ```
 
-- Models can be downloaded from [here](https://drive.google.com/file/d/1qJXBnCK-DipWVsonJjo0vmBNca3-rwEe/view?usp=drive_link), and tar -zxvf models.tar.gz -C ./savemodels/
+- Models can be downloaded from [here](https://drive.google.com/file/d/19l8UqEIT2Z5ndTKLq3_Z4xClKbHtAZMq/view?usp=drive_link), and tar -xzvf savemodels.tar.gz
 
 ## Experiments
 Please refer to the [experiments](./experiments/readme.md) for the experiments

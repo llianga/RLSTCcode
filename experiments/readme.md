@@ -63,7 +63,7 @@ python rl_estimate.py -modeldir ../savemodels/modelsk12 -base_cluster ../data/td
 python rl_estimate.py -modeldir ../savemodels/modelsk14 -base_cluster ../data/tdrive_clustercenter_14 -theta 0.2
 ```
 
-## Impact of $OD_b$
+## Impact of OD_b
 ```
 python rl_estimatewoODb.py
 ```

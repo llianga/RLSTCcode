@@ -23,16 +23,18 @@ def evaluate(elist):
     aver_cr = float(odist_e/env.basesim_E)
     return aver_cr
 
-def train(amount, saveclus, sidx=1000, eidx=1100):
+def train(amount, saveclus, sidx, eidx):
     batch_size = 32
     check = 999999
     TR_CR = []
     start = time()
     Round = 2 
+    idxlist = [i for i in range(amount)]
     while Round != 0:
+        random.shuffle(idxlist)
         Round = Round - 1
         REWARD = 0.0
-        for episode in range(amount):
+        for episode in idxlist:
             observation, steps = env.reset(episode, 'T') 
             for index in range(1, steps): 
                 if index == steps - 1:
@@ -95,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument("-trajfile", default='../data/Tdrive_norm_traj', help="baseclusTfile")
     parser.add_argument("-baseclusT", default='../data/tdrive_clustercenter', help="baseclusTfile")
     parser.add_argument("-baseclusE", default='../data/tdrive_clustercenter', help="baseclusEfile")
-    parser.add_argument("-saveclus", default='kfoldmodels', help="saveclusfile")
+    parser.add_argument("-saveclus", default='../models/kfoldmodels', help="saveclusfile")
     parser.add_argument("-k", type=int, default=5, help="k")
     parser.add_argument("-dataset", default='tdrive', help="dataset")
     args = parser.parse_args()
@@ -105,7 +107,7 @@ if __name__ == "__main__":
     
     for i in range(args.k):
         trainfilename = '../data/'+args.dataset+'_trainset'+str(i)
-        savecluspath = '../'+args.saveclus+str(i)
+        savecluspath = args.saveclus+str(i)
         if not os.path.exists(savecluspath):
             os.makedirs(savecluspath)
         trainset = pickle.load(open(trainfilename, 'rb'))

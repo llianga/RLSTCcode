@@ -1,4 +1,4 @@
-from MDP import TrajRLclus
+from MDPwoODb import TrajRLclus
 from rl_nn import DeepQNetwork
 import numpy as np
 import tensorflow as tf
@@ -23,7 +23,7 @@ def save_dist(split_traj):
             dist_matrix[j][i] = dist_matrix[i][j]
     return dist_matrix
 
-def effective_rl(elist):
+def effective_rl(elist, savesubtraj, theta):
     count = 0
     print(len(elist))
     ori_overdist = env.basesim_E 
@@ -62,19 +62,24 @@ def effective_rl(elist):
             max_value = max(filtered_list)  
         else:
             max_value = 1e10
-        print('iteration: {}, OD: {}, maxdist: {}'.format(count, overdist, max_value))
-        if count==25:
-            break    
+        
+        if (max_value<theta) or count==8:
+            break   
+    
+    if savesubtraj == 1:
+        pickle.dump(subtrajectory, open('../data/' + 'ied_subtrajs_'+str(len(elist)), 'wb'), protocol=2)
     return overdist
     
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="estimate")
     parser.add_argument("-amount", type=int, default=1000, help="data size")
-    parser.add_argument("-modeldir", default='../savemodels/1kmodels', help="model folder")
+    parser.add_argument("-modeldir", default='../savemodels/modelstate4', help="model folder")
     parser.add_argument("-modelchoose", type=int, default=0, help="choose model")
     parser.add_argument("-testdata", default='../data/Tdrive_testdata', help="choose model")
     parser.add_argument("-base_cluster", default='../data/tdrive_clustercenter', help="base_cluster")
+    parser.add_argument("-savesubtraj", type=int, default=0, help="whether save subtraj")
+    parser.add_argument("-theta", type=float, default=0.8, help="threshold of iteration")
     parser.add_argument("-caltime", type=int, default=0, help="display time")
     
     args = parser.parse_args()
@@ -86,8 +91,9 @@ if __name__ == '__main__':
     RL.load(model) 
     elist = [i for i in range(args.amount)]
     st = time()
-    overdist = effective_rl(elist) 
+    overdist = effective_rl(elist, args.savesubtraj, args.theta) 
     et = time()
     
+    print('--------OD--------', overdist)
     if args.caltime == 1:
         print('--------estimate time--------', et - st, 'seconds')

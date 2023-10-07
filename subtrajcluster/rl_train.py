@@ -31,58 +31,60 @@ def evaluate(elist):
     aver_cr = float(odist_e/env.basesim_E)
     return aver_cr
 
-def train(amount, saveclus, sidx=1000, eidx=1100):
+def train(amount, saveclus, sidx, eidx):
     batch_size = 32
     check = 999999
     TR_CR = []
     start = time()
-    Round = 10 * amount
+    Round = 10 
+    idxlist = [i for i in range(amount)]
     while Round != 0:
+        random.shuffle(idxlist)
         Round = Round - 1
-        episode = random.randint(0, amount-1)
         REWARD = 0.0
+        for episode in idxlist:
         
-        observation, steps = env.reset(episode, 'T')
-        
-        for index in range(1, steps): 
-            if index == steps - 1:
-                done = True
-            else:
-                done = False
-            action = RL.act(observation)
-            observation_, reward = env.step(episode, action, index, 'T')
-            if reward != 0:
-                REWARD = REWARD + reward
-            RL.remember(observation, action, reward, observation_, done)
-            if done:
-                break
-            if len(RL.memory) > batch_size:
-                RL.replay(episode, batch_size)
-                RL.soft_update(0.05)
-            observation = observation_
+            observation, steps = env.reset(episode, 'T')
+            
+            for index in range(1, steps): 
+                if index == steps - 1:
+                    done = True
+                else:
+                    done = False
+                action = RL.act(observation)
+                observation_, reward = env.step(episode, action, index, 'T')
+                if reward != 0:
+                    REWARD = REWARD + reward
+                RL.remember(observation, action, reward, observation_, done)
+                if done:
+                    break
+                if len(RL.memory) > batch_size:
+                    RL.replay(episode, batch_size)
+                    RL.soft_update(0.05)
+                observation = observation_
 
-        if episode % 500 == 0 and episode != 0:
-            print(episode, '/ 500', time() - start, 'seconds')
-            aver_cr = evaluate([i for i in range(sidx, eidx)])  #
+            if episode % 500 == 0 and episode != 0:
+                print(episode, '/ 500', time() - start, 'seconds')
+                aver_cr = evaluate([i for i in range(sidx, eidx)])  #
+                
+                for i in env.clusters_E.keys():
+                    env.clusters_E[i][0] = []
+                    env.clusters_E[i][1] = []
+                    env.clusters_E[i][3] = defaultdict(list)
             
-            for i in env.clusters_E.keys():
-                env.clusters_E[i][0] = []
-                env.clusters_E[i][1] = []
-                env.clusters_E[i][3] = defaultdict(list)
-           
-            CR = compute_overdist(env.clusters_T)
-            print('Training CR: {}, Validation CR: {}'.format(CR, aver_cr))
+                CR = compute_overdist(env.clusters_T)
+                print('Training CR: {}, Validation CR: {}'.format(CR, aver_cr))
+                
+                if aver_cr < check or episode % 500 == 0:
+                    RL.save(saveclus + '/sub-RL-' + str(aver_cr) + '.h5')
+                    print('Save model at episode {} with competive ratio {}'.format(episode, aver_cr))
+                if aver_cr < check:
+                    check = aver_cr
+                    print('maintain the current best', check)
             
-            if aver_cr < check or episode % 500 == 0:
-                RL.save(saveclus + '/sub-RL-' + str(aver_cr) + '.h5')
-                print('Save model at episode {} with competive ratio {}'.format(episode, aver_cr))
-            if aver_cr < check:
-                check = aver_cr
-                print('maintain the current best', check)
-        
-        cr = compute_overdist(env.clusters_T)
-        train_acc = cr/env.basesim_T
-        od = env.overall_sim  
+            cr = compute_overdist(env.clusters_T)
+            train_acc = cr/env.basesim_T
+            od = env.overall_sim  
         env.update_cluster('T')  
         
 if __name__ == "__main__":

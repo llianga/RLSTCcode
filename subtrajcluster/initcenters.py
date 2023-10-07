@@ -72,11 +72,11 @@ def saveclus(k, subtrajs, trajs, amount):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="crossvalidate")
-    parser.add_argument("-subtrajsfile", default='../data/traclus_subtrajs_1000_norm_t', help="baseclusTfile")
-    parser.add_argument("-trajsfile", default='../data/test_simpled_trajs_norm_t', help="baseclusEfile")
+    parser.add_argument("-subtrajsfile", default='../data/traclus_subtrajs', help="baseclusTfile")
+    parser.add_argument("-trajsfile", default='../data/Tdrive_norm_traj', help="baseclusEfile")
     parser.add_argument("-k", type=int, default=10, help="k")
     parser.add_argument("-amount", type=int, default=1000, help="k")
-    parser.add_argument("-centerfile", default='../clustercenter/initialcenter10', help="baseclusEfile")
+    parser.add_argument("-centerfile", default='../data/tdrive_clustercenter', help="baseclusEfile")
     
     # subtrajsfile = sys.argv[1]
     # trajsfile = sys.argv[2]

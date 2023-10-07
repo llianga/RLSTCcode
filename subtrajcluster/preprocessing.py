@@ -5,6 +5,7 @@ from point import Point
 from traj import Traj
 from trajdistance import traj_mdl_comp
 import random
+import argparse
 
 def processtrajs(trajs):
     trajslist = []
@@ -126,13 +127,21 @@ def getsimptrajs(trajs):
     return simptrajs   
 
 if __name__ == "__main__":
-    trajs = pickle.load(open('../data/geo_all_trajs', 'rb'))
+    parser = argparse.ArgumentParser(description="preprocess")
+    parser.add_argument("-trajfile", default='../data/Tdrive', help="trajfile")
+    parser.add_argument("-maxlen", type=int, default=500, help="maxlength")
+    parser.add_argument("-minlen", type=int, default=10, help="minlength")
+    parser.add_argument("-simpledtrajfile", default='../data/Tdrive_norm_traj', help="simpledtrajfile")
+    
+    args = parser.parse_args()
+    
+    trajs = pickle.load(open(args.trajfile, 'rb'))
     trajslist = processtrajs(trajs)   
-    trajs = processlength(trajslist, 500, 10)
+    trajs = processlength(trajslist, args.maxlen, args.minlen)
     norm_trajs = normtimetrajs(trajs)
     trajlists = convert2traj(norm_trajs)
     simpletrajs = getsimptrajs(trajlists)
-    pickle.dump(simpletrajs, open('../data/geolife_norm_traj', 'wb'), protocol=2)
+    pickle.dump(simpletrajs, open(args.simpledtrajfile, 'wb'), protocol=2)
     
     
    

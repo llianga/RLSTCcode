@@ -13,15 +13,22 @@ This is a python implementation of the paper 'Sub-trajectory Clustering with Dee
 
 ## Preprocessing
 To get the required data or you can directly use our provided dataset.
+
 cd subtrajcluster
+
 python preprocessing.py
+
 You could preprocess other datasets.
 
 ## Training
 You could use n-fold validations to train models, the default value of n is 5. 
+
 python crosstrain.py -dataset tdrive
+
 You can also train the models using a non n-fold validation method.
+
 python rl_train.py
+
 - Models can be downloaded from [here](https://jbox.sjtu.edu.cn/l/71xmzT), and tar -zxvf models.tar.gz -C ./models/
 
 ## Experiments

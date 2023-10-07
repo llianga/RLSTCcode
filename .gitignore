@@ -27,8 +27,8 @@ subtrajs/
 traindata/
 wd/
 subtrajcluster/test.py
-
-
-
+data/
+savemodels/
+subtrajcluster/__pycache__/
 
 

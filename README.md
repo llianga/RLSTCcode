@@ -37,4 +37,4 @@ python rl_train.py
 - Models can be downloaded from [here](https://drive.google.com/file/d/1qJXBnCK-DipWVsonJjo0vmBNca3-rwEe/view?usp=drive_link), and tar -zxvf models.tar.gz -C ./savemodels/
 
 ## Experiments
-Please refer to the ./experiments/readme.md for the experiments
+Please refer to the [experiments](./experiments/readme.md) for the experiments

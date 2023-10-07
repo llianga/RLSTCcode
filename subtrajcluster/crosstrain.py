@@ -85,8 +85,8 @@ def ksplitdataset(trajs,k, dataset):
         test_set = chunks[j]
 
         train_set = [item for i, sublist in enumerate(chunks) if i != j for item in sublist]
-        testfilename = '../data/'+ dataset + '_testset'+str(j)
-        trainfilename = '../data/'+ dataset + '_trainset'+str(j)
+        testfilename = '../data/'+ dataset + '_testset_'+str(j)
+        trainfilename = '../data/'+ dataset + '_trainset_'+str(j)
         pickle.dump(test_set, open(testfilename, 'wb'), protocol=2)
         pickle.dump(train_set, open(trainfilename, 'wb'), protocol=2)
 
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     ksplitdataset(trajs,args.k, args.dataset)
     
     for i in range(args.k):
-        trainfilename = '../data/'+args.dataset+'_trainset'+str(i)
+        trainfilename = '../data/'+args.dataset+'_trainset_'+str(i)
         savecluspath = args.saveclus+str(i)
         if not os.path.exists(savecluspath):
             os.makedirs(savecluspath)

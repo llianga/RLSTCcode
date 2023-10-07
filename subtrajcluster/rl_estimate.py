@@ -67,7 +67,7 @@ def effective_rl(elist, savesubtraj, theta):
             break   
     
     if savesubtraj == 1:
-        pickle.dump(subtrajectory, open('../data/' + 'ied_subtrajs_'+str(len(elist)), 'wb'), protocol=2)
+        pickle.dump(subtrajectory, open('../data/' + 'ied_subtrajs'+str(len(elist)), 'wb'), protocol=2)
     return overdist
     
     

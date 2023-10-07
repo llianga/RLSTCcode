@@ -14,9 +14,7 @@ This is a python implementation of the paper 'Sub-trajectory Clustering with Dee
 ## Preprocessing
 To get the required data or you can directly use our provided dataset.
 
-```cd subtrajcluster```
-
-```python preprocessing.py```
+```cd subtrajcluster/ python preprocessing.py```
 
 You could preprocess other datasets.
 

@@ -25,7 +25,6 @@ def save_dist(split_traj):
 
 def effective_rl(elist, savesubtraj, theta):
     count = 0
-    print(len(elist))
     ori_overdist = env.basesim_E 
     while True: 
         count += 1

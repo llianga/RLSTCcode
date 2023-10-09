@@ -25,7 +25,6 @@ def save_dist(split_traj):
 
 def effective_rl(elist, savesubtraj, theta):
     count = 0
-    print(len(elist))
     ori_overdist = env.basesim_E 
     while True: 
         count += 1
@@ -79,7 +78,7 @@ if __name__ == '__main__':
     parser.add_argument("-testdata", default='../data/Tdrive_testdata', help="choose model")
     parser.add_argument("-base_cluster", default='../data/tdrive_clustercenter', help="base_cluster")
     parser.add_argument("-savesubtraj", type=int, default=0, help="whether save subtraj")
-    parser.add_argument("-theta", type=float, default=0.8, help="threshold of iteration")
+    parser.add_argument("-theta", type=float, default=0.6, help="threshold of iteration")
     parser.add_argument("-caltime", type=int, default=0, help="display time")
     
     args = parser.parse_args()

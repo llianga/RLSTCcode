@@ -30,5 +30,7 @@ subtrajcluster/test.py
 data/
 savemodels/
 subtrajcluster/__pycache__/
+subtrajcluster/crosstrain1008.txt
+subtrajcluster/rltrain1008.txt
 
 

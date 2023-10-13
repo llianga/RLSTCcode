@@ -36,7 +36,7 @@ def train(amount, saveclus, sidx, eidx):
     check = 999999
     TR_CR = []
     start = time()
-    Round = 10 
+    Round = 6 
     idxlist = [i for i in range(amount)]
     while Round != 0:
         random.shuffle(idxlist)

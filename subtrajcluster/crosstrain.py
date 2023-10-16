@@ -27,8 +27,7 @@ def train(amount, saveclus, sidx, eidx):
     batch_size = 32
     check = 999999
     TR_CR = []
-    start = time()
-    Round = 2 
+    Round = 1 
     idxlist = [i for i in range(amount)]
     while Round != 0:
         random.shuffle(idxlist)
@@ -54,9 +53,7 @@ def train(amount, saveclus, sidx, eidx):
                     RL.soft_update(0.001) 
                 observation = observation_
             if episode % 500 == 0 and episode != 0:
-                print(episode, '/ 500', time() - start, 'seconds')
-                
-                aver_cr = evaluate([i for i in range(sidx, eidx)])  #
+                aver_cr = evaluate([i for i in range(sidx, eidx)])  
                
                 for i in env.clusters_E.keys():
                     env.clusters_E[i][0] = []
@@ -65,7 +62,7 @@ def train(amount, saveclus, sidx, eidx):
                 
                 if aver_cr < check or episode % 500 == 0:
                     RL.save(saveclus + '/sub-RL-' + str(aver_cr) + '.h5')
-                    print('Save model at episode {} with competive ratio {}'.format(episode, aver_cr))
+                    # print('Save model at episode {} with competive ratio {}'.format(episode, aver_cr))
                 if aver_cr < check:
                     check = aver_cr
                     print('maintain the current best', check)

@@ -36,7 +36,7 @@ def train(amount, saveclus, sidx, eidx):
     check = 999999
     TR_CR = []
     start = time()
-    Round = 6 
+    Round = 2
     idxlist = [i for i in range(amount)]
     while Round != 0:
         random.shuffle(idxlist)
@@ -64,7 +64,6 @@ def train(amount, saveclus, sidx, eidx):
                 observation = observation_
 
             if episode % 500 == 0 and episode != 0:
-                print(episode, '/ 500', time() - start, 'seconds')
                 aver_cr = evaluate([i for i in range(sidx, eidx)])  #
                 
                 for i in env.clusters_E.keys():
@@ -73,11 +72,10 @@ def train(amount, saveclus, sidx, eidx):
                     env.clusters_E[i][3] = defaultdict(list)
             
                 CR = compute_overdist(env.clusters_T)
-                print('Training CR: {}, Validation CR: {}'.format(CR, aver_cr))
+                # print('Training CR: {}, Validation CR: {}'.format(CR, aver_cr))
                 
                 if aver_cr < check or episode % 500 == 0:
                     RL.save(saveclus + '/sub-RL-' + str(aver_cr) + '.h5')
-                    print('Save model at episode {} with competive ratio {}'.format(episode, aver_cr))
                 if aver_cr < check:
                     check = aver_cr
                     print('maintain the current best', check)
@@ -89,7 +87,7 @@ def train(amount, saveclus, sidx, eidx):
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="train")
-    parser.add_argument("-amount", type=int, default=2000, help="training amount")
+    parser.add_argument("-amount", type=int, default=500, help="training trajectory")
     parser.add_argument("-traindata", default='../data/Tdrive_norm_traj', help="baseclusTfile")
     parser.add_argument("-baseclusT", default='../data/tdrive_clustercenter', help="baseclusTfile")
     parser.add_argument("-baseclusE", default='../data/tdrive_clustercenter', help="baseclusEfile")

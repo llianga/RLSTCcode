@@ -1,4 +1,4 @@
-# Sub-trajectory Clustering with Deep Reinforcement Learning
+# RLSTCcode
 This is a python implementation of the paper 'Sub-trajectory Clustering with Deep Reinforcement Learning'.
 
 ## Requirements
